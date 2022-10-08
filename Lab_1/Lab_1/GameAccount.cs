@@ -48,8 +48,12 @@ namespace Lab_1
 
             var game = new Games(true, rating, this, opponent);
             AllGames.Add(game);
+            //adding a win game for this
 
-            opponent.LoseGame(this, rating);
+            rating = MinusRating(opponent.CurrentRating, rating);
+            game = new Games(false, rating, opponent, this);
+            opponent.AllGames.Add(game);
+            //adding a lose game for opponent
         }
 
         public void LoseGame(GameAccount opponent, int rating)
@@ -59,16 +63,25 @@ namespace Lab_1
                 throw new ArgumentOutOfRangeException(nameof(rating), "Argument must be positive");
             }
 
-            opponent.WinGame(this, rating);
+            var game = new Games(true, rating, opponent, this);
+            opponent.AllGames.Add(game);
             // стоїть першим, бо далі rating змінюється
+            //adding a win game for this
 
-            if (CurrentRating <= rating)
+            rating = MinusRating(opponent.CurrentRating, rating);
+            game = new Games(false, rating, this, opponent);
+            AllGames.Add(game);
+        }
+
+        private static int MinusRating(int currentRating, int rating)
+        {
+            //this method controles rating to be >= 1
+            if (currentRating <= rating)
             {
-                rating = CurrentRating - 1;
+                return 1 - currentRating;
                 //завжди залишиться одиниця
             }
-            var game = new Games(false, -rating, this, opponent);
-            AllGames.Add(game);
+            return -rating;
         }
 
         public string GetStats()
