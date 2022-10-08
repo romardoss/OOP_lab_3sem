@@ -68,7 +68,7 @@ namespace Lab_1
             // стоїть першим, бо далі rating змінюється
             //adding a win game for this
 
-            rating = MinusRating(opponent.CurrentRating, rating);
+            rating = MinusRating(CurrentRating, rating);
             game = new Games(false, rating, this, opponent);
             AllGames.Add(game);
         }
@@ -91,7 +91,11 @@ namespace Lab_1
             stats.AppendLine("ID\tResult\tRating\tOpponent");
             foreach(var item in AllGames)
             {
-                int rating = item.IsWin ? item.Rating : -item.Rating;
+                string rating = item.IsWin ? ("+" + item.Rating) : item.Rating.ToString();
+                if (rating == "0" && !item.IsWin)
+                {
+                    rating = "-0";
+                }
                 string winOrLose = item.IsWin ? "Win" : "Lose";
                 stats.AppendLine($"{item.GameIndex}\t{winOrLose}\t{rating}\t{item.Opponent.UserName}");
             }

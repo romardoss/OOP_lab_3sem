@@ -14,7 +14,7 @@ namespace Lab_1
 
             Roma.WinGame(Dima, 30);
             Vasya.LoseGame(Roma, 100);
-            Dima.WinGame(Roma, 100);
+            Dima.WinGame(Roma, 200);
 
 
             Console.WriteLine(Dima.GetStats());
