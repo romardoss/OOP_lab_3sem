@@ -7,8 +7,18 @@ namespace Lab_1
         static void Main(string[] args)
         {
 
-            Testing.UnavailableNameTest();
+            //Testing.UnavailableNameTest();
+            GameAccount Roma = new GameAccount("Roma");
+            var Dima = new GameAccount("Dima");
+            var Vasya = new GameAccount("Vasya");
 
+            Roma.WinGame(Dima, 30);
+            Vasya.LoseGame(Roma, 100);
+            Dima.WinGame(Roma, 100);
+
+
+            Console.WriteLine(Dima.GetStats());
+            Console.WriteLine(Roma.GetStats());
         }
     }
 }
