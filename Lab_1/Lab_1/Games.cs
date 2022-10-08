@@ -6,7 +6,6 @@ namespace Lab_1
     internal class Games
     {
         public bool IsWin { get; }
-        public GameAccount Player { get; }
         public GameAccount Opponent { get; }
         public int Rating { get; }
         private static double GameID = 28462;
@@ -18,7 +17,6 @@ namespace Lab_1
             GameID += 0.5;
             //this make a possibility to have the same game index for both players
             this.IsWin = isWin;
-            this.Player = player;
             this.Opponent = opponent;
             this.Rating = rating;
         }
