@@ -8,6 +8,10 @@ namespace Lab_1
         {
 
             //Testing.UnavailableNameTest();
+            //Testing.ArgumentOutOfRangeTest1();
+            //Testing.ArgumentOutOfRangeTest2();
+            //Testing.ArgumentOutOfRangeTest3();
+            //Testing.ArgumentOutOfRangeTest4();
             GameAccount Roma = new GameAccount("Roma");
             var Dima = new GameAccount("Dima");
             var Vasya = new GameAccount("Vasya");
