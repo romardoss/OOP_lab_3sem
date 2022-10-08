@@ -87,17 +87,20 @@ namespace Lab_1
         public string GetStats()
         {
             var stats = new System.Text.StringBuilder();
-
-            stats.AppendLine("ID\tResult\tRating\tOpponent");
+            int wholeRaiting = 1;
+            
+            stats.AppendLine("Game statistics of " + this.UserName);
+            stats.AppendLine("ID\tResult\tRating\tChange\tOpponent");
             foreach(var item in AllGames)
             {
+                wholeRaiting += item.Rating;
                 string rating = item.IsWin ? ("+" + item.Rating) : item.Rating.ToString();
                 if (rating == "0" && !item.IsWin)
                 {
                     rating = "-0";
                 }
                 string winOrLose = item.IsWin ? "Win" : "Lose";
-                stats.AppendLine($"{item.GameIndex}\t{winOrLose}\t{rating}\t{item.Opponent.UserName}");
+                stats.AppendLine($"{item.GameIndex}\t{winOrLose}\t{wholeRaiting}\t{rating}\t{item.Opponent.UserName}");
             }
 
             return stats.ToString();
