@@ -71,6 +71,19 @@ namespace Lab_1
             AllGames.Add(game);
         }
 
-        
+        public string GetStats()
+        {
+            var stats = new System.Text.StringBuilder();
+
+            stats.AppendLine("ID\tResult\tRating\tOpponent");
+            foreach(var item in AllGames)
+            {
+                int rating = item.IsWin ? item.Rating : -item.Rating;
+                string winOrLose = item.IsWin ? "Win" : "Lose";
+                stats.AppendLine($"{item.GameIndex}\t{item.IsWin}\t{rating}\t{item.Opponent}");
+            }
+
+            return stats.ToString();
+        }
     }
 }
