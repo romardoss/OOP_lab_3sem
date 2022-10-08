@@ -37,8 +37,6 @@ namespace Lab_1
             }
             UserName = name;
             AllNames.Add(name);
-            GamesCount = 0;
-            CurrentRating = 1;
         }
 
         public void WinGame(GameAccount opponent, int rating)
