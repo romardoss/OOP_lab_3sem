@@ -1,2 +1,6 @@
 /OOP_lesson1
-/Lab_1/.vs
+**/.vs
+**/bin
+**/obj
+**Lab_1.csproj
+**Lab_1.sln
