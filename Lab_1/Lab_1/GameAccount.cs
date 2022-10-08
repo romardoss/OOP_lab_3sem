@@ -10,6 +10,7 @@ namespace Lab_1
         public int CurrentRating { get; }
         public int GamesCount { get; }
         private static List<string> AllNames = new List<string>();
+        public static List<Games> AllGames = new List<Games>();
 
         public GameAccount(string name)
         {
@@ -22,5 +23,12 @@ namespace Lab_1
             GamesCount = 0;
             CurrentRating = 1;
         }
+
+        public void WinGame(GameAccount opponent, int rating)
+        {
+            var game = new Games(true, rating, this, opponent);
+            AllGames.Add(game);
+        }
+
     }
 }
