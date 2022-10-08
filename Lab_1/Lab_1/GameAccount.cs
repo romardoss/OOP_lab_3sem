@@ -33,11 +33,8 @@ namespace Lab_1
 
             var game = new Games(true, rating, this, opponent);
             AllGames.Add(game);
-            // adding this game to this account
 
-            game = new Games(false, -rating, opponent, this); 
-            opponent.AllGames.Add(game);
-            // adding this game to the opponent account
+            opponent.LoseGame(this, rating);
         }
 
         public void LoseGame(GameAccount opponent, int rating)
@@ -49,7 +46,8 @@ namespace Lab_1
 
             var game = new Games(false, -rating, this, opponent);
             AllGames.Add(game);
-            // adding this game to this account
+
+            opponent.WinGame(this, rating);
         }
 
     }
