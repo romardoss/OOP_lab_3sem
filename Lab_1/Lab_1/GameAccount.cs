@@ -11,7 +11,7 @@ namespace Lab_1
         {
             get
             {
-                int rating = 0;
+                int rating = 1;
                 foreach(var item in AllGames)
                 {
                     rating += item.Rating;
@@ -59,10 +59,16 @@ namespace Lab_1
                 throw new ArgumentOutOfRangeException(nameof(rating), "Argument must be positive");
             }
 
+            opponent.WinGame(this, rating);
+            // стоїть першим, бо далі rating змінюється
+
+            if (CurrentRating <= rating)
+            {
+                rating = CurrentRating - 1;
+                //завжди залишиться одиниця
+            }
             var game = new Games(false, -rating, this, opponent);
             AllGames.Add(game);
-
-            opponent.WinGame(this, rating);
         }
 
         
