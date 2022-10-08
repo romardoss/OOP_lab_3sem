@@ -2,11 +2,10 @@
 
 namespace Lab_1
 {
-    internal class Program
+    internal class MainClass
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
