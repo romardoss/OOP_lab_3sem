@@ -88,11 +88,13 @@ namespace Lab_1
         {
             var stats = new System.Text.StringBuilder();
             int wholeRaiting = 1;
+            int gameCount = 0;
             
             stats.AppendLine("Game statistics of " + this.UserName);
-            stats.AppendLine("ID\tResult\tRating\tChange\tOpponent");
+            stats.AppendLine("ID\tGame number\tResult\tRating\tChange\tOpponent");
             foreach(var item in AllGames)
             {
+                gameCount++;
                 wholeRaiting += item.Rating;
                 string rating = item.IsWin ? ("+" + item.Rating) : item.Rating.ToString();
                 if (rating == "0" && !item.IsWin)
@@ -100,7 +102,8 @@ namespace Lab_1
                     rating = "-0";
                 }
                 string winOrLose = item.IsWin ? "Win" : "Lose";
-                stats.AppendLine($"{item.GameIndex}\t{winOrLose}\t{wholeRaiting}\t{rating}\t{item.Opponent.UserName}");
+                stats.AppendLine($"{item.GameIndex}\t{gameCount}\t" +
+                    $"\t{winOrLose}\t{wholeRaiting}\t{rating}\t{item.Opponent.UserName}");
             }
 
             return stats.ToString();
