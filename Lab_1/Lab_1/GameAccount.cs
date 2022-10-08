@@ -35,14 +35,21 @@ namespace Lab_1
             AllGames.Add(game);
             // adding this game to this account
 
-            game = new Games(false, rating, opponent, this); 
+            game = new Games(false, -rating, opponent, this); 
             opponent.AllGames.Add(game);
             // adding this game to the opponent account
         }
 
-        public void LoseGame()
+        public void LoseGame(GameAccount opponent, int rating)
         {
+            if (rating <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rating), "Argument must be positive");
+            }
 
+            var game = new Games(false, -rating, this, opponent);
+            AllGames.Add(game);
+            // adding this game to this account
         }
 
     }
