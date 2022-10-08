@@ -9,13 +9,14 @@ namespace Lab_1
         public GameAccount Player { get; }
         public GameAccount Opponent { get; }
         public int Rating { get; }
-        private static int GameID = 28462;
+        private static double GameID = 28462;
         public string GameIndex { get; }
 
         public Games(bool isWin, int rating, GameAccount player, GameAccount opponent)
         {
-            this.GameIndex = GameID.ToString();
-            GameID++;
+            this.GameIndex = ((int)GameID).ToString();
+            GameID += 0.5;
+            //this make a possibility to have the same game index for both players
             this.IsWin = isWin;
             this.Player = player;
             this.Opponent = opponent;
