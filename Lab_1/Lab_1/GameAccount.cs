@@ -7,8 +7,25 @@ namespace Lab_1
     internal class GameAccount
     {
         public string UserName { get; }
-        public int CurrentRating { get; }
-        public int GamesCount { get; }
+        public int CurrentRating 
+        {
+            get
+            {
+                int rating = 0;
+                foreach(var item in AllGames)
+                {
+                    rating += item.Rating;
+                }
+                return rating;
+            }
+        }
+        public int GamesCount 
+        {
+            get
+            {
+                return AllGames.Count;
+            }
+        }
         private static List<string> AllNames = new List<string>();
         public List<Games> AllGames = new List<Games>();
 
@@ -50,5 +67,6 @@ namespace Lab_1
             opponent.WinGame(this, rating);
         }
 
+        
     }
 }
