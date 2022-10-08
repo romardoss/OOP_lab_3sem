@@ -93,7 +93,7 @@ namespace Lab_1
             {
                 int rating = item.IsWin ? item.Rating : -item.Rating;
                 string winOrLose = item.IsWin ? "Win" : "Lose";
-                stats.AppendLine($"{item.GameIndex}\t{item.IsWin}\t{rating}\t{item.Opponent}");
+                stats.AppendLine($"{item.GameIndex}\t{winOrLose}\t{rating}\t{item.Opponent.UserName}");
             }
 
             return stats.ToString();
