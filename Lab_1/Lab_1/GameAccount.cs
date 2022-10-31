@@ -12,7 +12,7 @@ namespace Lab_1
             get
             {
                 int rating = 1;
-                foreach(var item in AllGames)
+                foreach(var item in GameHistory)
                 {
                     int change;
                     bool isWin = item.IsWin;
@@ -42,11 +42,11 @@ namespace Lab_1
         {
             get
             {
-                return AllGames.Count;
+                return GameHistory.Count;
             }
         }
-        private static List<string> AllNames = new();
-        public List<Game> AllGames = new();
+        private static readonly List<string> AllNames = new();
+        private readonly List<Game> GameHistory = new();
 
         public GameAccount(string name)
         {
@@ -66,10 +66,10 @@ namespace Lab_1
             }
 
             var game = new Game(true, rating, this, opponent);
-            AllGames.Add(game);
+            GameHistory.Add(game);
             //adding a win game for this
 
-            opponent.AllGames.Add(game);
+            opponent.GameHistory.Add(game);
             //adding a lose game for opponent
         }
 
@@ -81,8 +81,8 @@ namespace Lab_1
             }
 
             var game = new Game(false, rating, this, opponent);
-            AllGames.Add(game);
-            opponent.AllGames.Add(game);
+            GameHistory.Add(game);
+            opponent.GameHistory.Add(game);
 
         }
 
@@ -94,7 +94,7 @@ namespace Lab_1
             
             stats.AppendLine("Game statistics of " + this.UserName);
             stats.AppendLine("ID\tGame number\tResult\tRating\tChange\tOpponent");
-            foreach(var item in AllGames)
+            foreach(var item in GameHistory)
             {
                 gameCount++;
                 string rating;
