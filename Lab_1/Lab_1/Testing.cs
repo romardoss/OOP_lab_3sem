@@ -12,7 +12,7 @@ namespace Lab_1
             {
                 var GameAccount = new GameAccount("User");
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Console.WriteLine("Can`t create first account");
             }
@@ -21,7 +21,7 @@ namespace Lab_1
             {
                 var GameAccount = new GameAccount("User");
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 Console.WriteLine("Can`t create second account");
             }

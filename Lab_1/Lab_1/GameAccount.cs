@@ -14,7 +14,26 @@ namespace Lab_1
                 int rating = 1;
                 foreach(var item in AllGames)
                 {
-                    rating += item.Rating;
+                    int change;
+                    bool isWin = item.IsWin;
+                    if (item.Player1.UserName != this.UserName)
+                    {
+                        isWin = !isWin;
+                    }
+
+                    if (isWin)
+                    {
+                        change = item.Rating;
+                    }
+                    else
+                    {
+                        change = -item.Rating;
+                    }
+                    rating += change;
+                    if(rating < 1)
+                    {
+                        rating = 1;
+                    }
                 }
                 return rating;
             }
@@ -26,8 +45,8 @@ namespace Lab_1
                 return AllGames.Count;
             }
         }
-        private static List<string> AllNames = new List<string>();
-        public List<Game> AllGames = new List<Game>();
+        private static List<string> AllNames = new();
+        public List<Game> AllGames = new();
 
         public GameAccount(string name)
         {
@@ -50,8 +69,6 @@ namespace Lab_1
             AllGames.Add(game);
             //adding a win game for this
 
-            rating = MinusRating(opponent.CurrentRating, rating);
-            game = new Game(false, rating, opponent, this);
             opponent.AllGames.Add(game);
             //adding a lose game for opponent
         }
@@ -63,30 +80,10 @@ namespace Lab_1
                 throw new ArgumentOutOfRangeException(nameof(rating), "Argument must be positive");
             }
 
-            var game = new Game(true, rating, opponent, this);
-            opponent.AllGames.Add(game);
-            // стоїть першим, бо далі rating змінюється
-            //adding a win game for this
-
-            rating = MinusRating(CurrentRating, rating);
-            game = new Game(false, rating, this, opponent);
+            var game = new Game(false, rating, this, opponent);
             AllGames.Add(game);
-        }
+            opponent.AllGames.Add(game);
 
-        private static int MinusRating(int currentRating, int rating)
-        {
-            //this method controles rating to be >= 1
-            if (currentRating <= rating)
-            {
-                return 1 - currentRating;
-                //завжди залишиться одиниця
-            }
-            // 5
-            // 10
-            //10 > 5
-            // 1-5 = -4
-            // 5-4=1
-            return -rating;
         }
 
         public string GetStats()
@@ -100,15 +97,38 @@ namespace Lab_1
             foreach(var item in AllGames)
             {
                 gameCount++;
-                wholeRaiting += item.Rating;
-                string rating = item.IsWin ? ("+" + item.Rating) : item.Rating.ToString();
-                if (rating == "0" && !item.IsWin)
+                string rating;
+                bool isWin = item.IsWin;
+                string opponent;
+                if (item.Player2.UserName == this.UserName)
+                {
+                    isWin = !isWin;
+                    opponent = item.Player1.UserName;
+                }
+                else
+                {
+                    opponent = item.Player2.UserName;
+                }
+
+                if (isWin)
+                {
+                    wholeRaiting += item.Rating;
+                }
+                else
+                {
+                    int minusRating = (wholeRaiting <= item.Rating) ? (1-wholeRaiting) : -item.Rating;
+                    wholeRaiting += minusRating;
+                }
+
+                rating = isWin ? ("+" + item.Rating) : ("-" + item.Rating);
+                if (rating == "0" && !isWin)
                 {
                     rating = "-0";
                 }
-                string winOrLose = item.IsWin ? "Win" : "Lose";
+                string winOrLose = isWin ? "Win" : "Lose";
+
                 stats.AppendLine($"{item.GameIndex}\t{gameCount}\t" +
-                    $"\t{winOrLose}\t{wholeRaiting}\t{rating}\t{item.Opponent.UserName}");
+                    $"\t{winOrLose}\t{wholeRaiting}\t{rating}\t{opponent}");
             }
 
             return stats.ToString();
