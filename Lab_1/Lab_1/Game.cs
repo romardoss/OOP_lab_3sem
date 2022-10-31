@@ -3,7 +3,7 @@ using System;
 
 namespace Lab_1
 {
-    internal class Games
+    internal class Game
     {
         public bool IsWin { get; }
         public GameAccount Opponent { get; }
@@ -11,7 +11,7 @@ namespace Lab_1
         private static double GameID = 28462;
         public string GameIndex { get; }
 
-        public Games(bool isWin, int rating, GameAccount player, GameAccount opponent)
+        public Game(bool isWin, int rating, GameAccount player, GameAccount opponent)
         {
             this.GameIndex = ((int)GameID).ToString();
             GameID += 0.5;
